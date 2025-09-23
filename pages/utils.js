@@ -3,7 +3,6 @@ export function createPage(title, content){
 
     html = '<!DOCTYPE html><html><head><meta charset="UTF-8">'
     html += '<title>'+ title +'</title></head><body>'
-    html += '<h1>Mi espectacular pagina web</h1>'
     html += content
     html += '</body></html>'
 
