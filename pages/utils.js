@@ -3,6 +3,7 @@ export function createPage(title, content){
 
     html = '<!DOCTYPE html><html><head><meta charset="UTF-8">'
     html += '<title>'+ title +'</title></head><body>'
+    html += `<a href="/productos"> Listado</a> | <a href="/productos/nuevo"> Nuevo Proyecto</a>`
     html += content
     html += '</body></html>'
 
