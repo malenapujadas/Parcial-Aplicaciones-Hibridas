@@ -1,7 +1,8 @@
 import * as service from "../../services/productos.services.js"
 
 export function getProductos(req, res){
-    service.getProductos()
+    const filtros = req.query
+    service.getProductos(filtros)
         .then( productos => productos.length > 0 
                         ? res.status(200).json(productos)
                         : res.status(500).json({})

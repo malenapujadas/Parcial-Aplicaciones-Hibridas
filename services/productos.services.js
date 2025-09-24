@@ -1,94 +1,43 @@
 import { readFile, writeFile  } from "node:fs/promises"
+import { MongoClient, ObjectId } from "mongodb";
+
+const client = new MongoClient("mongodb+srv://admin:admin@dwn4ap.jj397vb.mongodb.net")
+const db = client.db("AH2023CP1")
 
 //funcion para leer los productos del json
-export function getProductos(filter={}){
-    return readFile("./data/productos.json", "utf-8")
-        .then((data) => {
-            return JSON.parse(data)
-        })
-        .then( productos =>{
-            if(filter.eliminados){
-                return productos
-            };
-            
-            const productosFiltrados=productos.filter(p => p.eliminado != true)
-            return productosFiltrados
-        } )
-        .catch(() => {
-            console.error("No se cargaronlos productos");
-            return []
-        });
+export async function getProductos(filter={}){
+    const filterMongo = {}
+
+    if(filter.nombre != undefined){
+        filterMongo.nombre = {$eq: filter.nombre}
+    }
+    
+    await client.connect()
+    return db.collection("Projects").find(filterMongo).toArray()
 }
 
 //funcion para traer los productos por id
-export function getProductosById(id){
-    return getProductos().then(productos =>{
-        const producto = productos.find( p => p.id == id )
-        return producto
-    })
+export async function getProductosById(_id){
+    await client.connect()
+    return db.collection("Projects").findOne({_id: new ObjectId(_id)})
 }
 
-export function guardarProducto(producto){
-    return getProductos().then( async(productos) =>{
-        const nuevoProducto = {
-            ...producto,
-            id: productos.length + 1
-        }
-        productos.push(nuevoProducto)
-        await writeFile("./data/productos.json", JSON.stringify(productos))
-        return nuevoProducto
-    })
-    .catch( () => nuevoProducto )
+export async function guardarProducto(producto){
+    await client.connect()
+    return db.collection("Projects").insertOne(producto)
 }
 
 
-export function reemplazarProducto(id, producto){
-    return getProductos().then(async productos =>{
-        const nuevoProducto = {
-            id: id,
-            ...producto,
-        }
-        const nuevoListado = productos.filter(p => p.id != id)
-        nuevoListado.push(nuevoProducto)
-        await writeFile("./data/productos.json", JSON.stringify(nuevoListado))
-        return nuevoProducto
-    })
-    .catch( () => nuevoProducto )
+export async function reemplazarProducto(_id, producto){
+    await client.connect()
+    return db.collection("Projects").replaceOne({_id: new ObjectId(_id)}, producto)
 }
 
 //eliminar prod
-export function eliminarProducto(id){
-    return getProductos().then(async productos =>{
-        const nuevoListado = productos.map(p => {
-            if(p.id == id){
-                p.eliminado = true
-            }
-            return p
-        })
-        
-        await writeFile("./data/productos.json", JSON.stringify(nuevoListado))
-        return id
-    })
-    .catch( () => id )
+export function eliminarProducto(_id){
+    return db.collection("Projects").deleteOne({_id: new ObjectId(_id)})
 }
 
-export function editarProducto(id, producto){
-    return getProductos().then(async productos =>{
-    let nuevoProducto  
-    const nuevoListado = productos.map( p => {
-        if(p.id == id){
-            nuevoProducto = {
-                "id": id,
-                "nombre": producto.nombre || p.nombre,
-                "descripcion": producto.descripcion || p.descripcion,
-                "tecnologias": producto.tecnologias || p.tecnologias
-            }
-            return nuevoProducto
-        }
-        return p
-    })
-        await writeFile("./data/productos.json", JSON.stringify(nuevoListado))
-        return nuevoProducto
-    })
-    .catch( () => nuevoProducto )
+export function editarProducto(_id, producto){
+    return db.collection("Projects").updateOne({_id: new ObjectId(_id)}, {$set: producto})
 }

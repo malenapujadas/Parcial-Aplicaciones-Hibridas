@@ -1,1 +1,56 @@
-[{"id":"1","nombre":"The met","descripcion":"Branding y diseño de imagen con un estilo divertido, logo, ilustraciones y visuales para reflejar la energía y el ambiente del lugar.","link":"https://www.behance.net/gallery/209429151/The-Met-Campus-Pub","img":"rutaimagen","tecnologias":["Illustrator, Photoshop"],"seccion":"Branding"},{"id":"2","nombre":" Exilux","descripcion":"Diseño web para marca de lentes, sitio moderno e intuitivo, que conecta estilo y funcionalidad en cada detalle.","link":"https://www.behance.net/gallery/230057595/EXILUX-E-commerce-Design","img":"rutaimagen","tecnologias":["Wordpress, Figma,"],"seccion":"Diseño web"},{"id":"3","nombre":"No perderte","descripcion":"Diseño de titulares para videoclip musical","link":"https://www.youtube.com/watch?v=L6V9gK5uLZo","img":"rutaimagen","tecnologias":["Illustrator, Photoshop,"],"seccion":"Videoclips"},{"id":"4","nombre":"Always open","descripcion":"Diseño gráfico e identidad de marca para cafetería en Madrid","link":"https://www.behance.net/gallery/223672901/Always-Open","img":"rutaimagen","tecnologias":["Figma, Photoshop, Illustrator, AfterEffects"],"seccion":"Diseño gráfico"},{"id":"5","nombre":"Miu Miu","descripcion":"Sesión fotográfica para marca de ropa Miu Miu, colección 2025","tecnologias":["Lightroom, Photoshop"]}]
+[
+    {
+        "id": "1",
+        "nombre": "The met",
+        "descripcion": "Branding y diseño de imagen con un estilo divertido, logo, ilustraciones y visuales para reflejar la energía y el ambiente del lugar.",
+        "link": "https://www.behance.net/gallery/209429151/The-Met-Campus-Pub",
+        "img": "rutaimagen",
+        "tecnologias": [
+            "Illustrator, Photoshop"
+        ],
+        "seccion": "Branding"
+    },
+    {
+        "id": "2",
+        "nombre": " Exilux",
+        "descripcion": "Diseño web para marca de lentes, sitio moderno e intuitivo, que conecta estilo y funcionalidad en cada detalle.",
+        "link": "https://www.behance.net/gallery/230057595/EXILUX-E-commerce-Design",
+        "img": "rutaimagen",
+        "tecnologias": [
+            "Wordpress, Figma,"
+        ],
+        "seccion": "Diseño web"
+    },
+    {
+        "id": "3",
+        "nombre": "No perderte",
+        "descripcion": "Diseño de titulares para videoclip musical",
+        "link": "https://www.youtube.com/watch?v=L6V9gK5uLZo",
+        "img": "rutaimagen",
+        "tecnologias": [
+            "Illustrator, Photoshop,"
+        ],
+        "seccion": "Videoclips"
+    },
+    {
+        "id": "4",
+        "nombre": "Always open",
+        "descripcion": "Diseño gráfico e identidad de marca para cafetería en Madrid",
+        "link": "https://www.behance.net/gallery/223672901/Always-Open",
+        "img": "rutaimagen",
+        "tecnologias": [
+            "Figma, Photoshop, Illustrator, AfterEffects"
+        ],
+        "seccion": "Diseño gráfico"
+    },
+    {
+        "id": "5",
+        "name": "Miu Miu CNY",
+        "description": "Sesión fotográfica para marca de ropa Miu Miu, colección 2025",
+        "link": "https://www.behance.net/gallery/216686253/MIU-MIU-CNY-2025",
+        "img": "rutaimagen",
+        "technologies": ["Lightroom, Photoshop"],
+        "section": "Diseño gráfico"
+
+    }
+]
