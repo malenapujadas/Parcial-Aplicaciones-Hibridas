@@ -13,7 +13,6 @@ export function createPage(title, content) {
                 <nav class="proyectos-links">
                 <a href="/">Inicio</a>
                 <a href="/productos">Listado</a>
-                <a href="/productos/nuevo">Nuevo Proyecto</a>
                 </nav>
             </header>
     

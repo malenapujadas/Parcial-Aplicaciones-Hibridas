@@ -1,60 +1,40 @@
-
 import { createPage } from "../pages/utils.js";
 
-// export function crearListadoProductos(productos, secciones) {
-//   let html = "<div class='filter'>";
-//   html += "<form action='/productos/filtrar' method='get'>";
-//   html += "<select name='seccion'>";
-//   secciones.forEach(seccion => {
-//       html += `<option value="${seccion}">${seccion}</option>`;
-//   });
-//   html += "</select>";
-//   html += "<input type='submit' value='Filtrar' />";
-//   html += "</form>";
-//   html += "</div>";
-
-//   html += "<div class='grid'>";
-//   productos.forEach(producto => {
-//       html += `
-//       <article class="card">
-//       <img src=${producto.img} alt="portfolio">
-//           <h3>${producto.nombre}</h3>
-//           <div class="actions">
-//           <a href="/productos/${producto._id}">Ver</a> |
-//           <a href="/productos/modificar/${producto._id}">Editar</a> |
-//           <a href="/productos/eliminar/${producto._id}">Eliminar</a>
-//           </div>
-//       </article>
-//       `;
-//   });
-//   html += "</div>";
-//   return createPage("Proyectos", html);
-// }
 export function crearListadoProductos(productos) {
-    let html = "<div class='grid'>";
-    productos.forEach(producto => {
-        html += `
-        <article class="card">
+  // Botón principal de agregar proyecto
+  let nuevoBtn = `
+    <div class="nuevo-proyecto-btn">
+      <a href="/productos/nuevo" class="btn-nuevo">+ Nuevo Proyecto</a>
+    </div>
+  `;
+
+  // Construcción del grid de proyectos
+  let html = nuevoBtn;
+  html += "<div class='grid'>";
+  productos.forEach(producto => {
+    html += `
+      <article class="card">
         <img src=${producto.img} alt="portfolio">
-            <h3>${producto.nombre}</h3>
-            <div class="actions">
-            <a href="/productos/${producto._id}">Ver</a> |
-            <a href="/productos/modificar/${producto._id}">Editar</a> |
-            <a href="/productos/eliminar/${producto._id}">Eliminar</a>
-            </div>
-        </article>
-        `;
-    });
-    html += "</div>";
-    return createPage("Proyectos", html);
+        <h3>${producto.nombre}</h3>
+        <div class="actions">
+          <a href="/productos/${producto._id}">Ver</a> |
+          <a href="/productos/modificar/${producto._id}">Editar</a> |
+          <a href="/productos/eliminar/${producto._id}">Eliminar</a>
+        </div>
+      </article>
+    `;
+  });
+  html += "</div>";
+
+  return createPage("Proyectos", html);
 }
 
 export function crearDetalleProducto(producto) {
   const html = `
-      <h1>Nombre del proyecto: ${producto.nombre}</h1>
-      <p>Descripción: ${producto.descripcion}</p>
-      <p>Tecnologías utilizadas: ${producto.tecnologias}</p>
-      <a href="/productos">Volver</a> 
+    <h1>Nombre del proyecto: ${producto.nombre}</h1>
+    <p>Descripción: ${producto.descripcion}</p>
+    <p>Tecnologías utilizadas: ${producto.tecnologias}</p>
+    <a href="/productos">Volver</a> 
   `;
   return createPage("Detalle del Producto", html);
 } 
