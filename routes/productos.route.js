@@ -1,22 +1,20 @@
 import express from "express"
 import * as controller from "../controller/productos.controller.js"
 
-
 const router = express.Router()
 
-// Ruta para filtrar productos
-// router.get("/productos/filtrar", controller.filtrarProductos);
-
 //traigo productos
-router.get( "/", controller.getProductos)
+router.get("/", controller.getProductos)
+
+// filtrar por sección
+router.get("/seccion/:seccion", controller.filtrarProductos)
 
 //Ruta a nuevo proyecto
-router.get( "/nuevo", controller.formularioNuevoProducto)
+router.get("/nuevo", controller.formularioNuevoProducto)
+router.post("/nuevo", controller.guardarProducto)
 
 //Ruta de los productos con el ID correspondiente
-router.get( "/:id", controller.getProductosById)
-
-router.post( "/nuevo", controller.guardarProducto)
+router.get("/:id", controller.getProductosById)
 
 //rutas para modificar un producto
 router.get("/modificar/:id", controller.formularioModificarProducto)
@@ -26,10 +24,4 @@ router.post("/modificar/:id", controller.editarProducto)
 router.get("/eliminar/:id", controller.formularioEliminar)
 router.post("/eliminar/:id", controller.eliminarProducto)
 
-
-
-
-
-
 export default router
-

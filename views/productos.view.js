@@ -31,14 +31,17 @@ export function crearListadoProductos(productos) {
 
 export function crearDetalleProducto(producto) {
   const html = `
-    <h1>Nombre del proyecto: ${producto.nombre}</h1>
-    <p>Descripción: ${producto.descripcion}</p>
-    <p>Tecnologías utilizadas: ${producto.tecnologias}</p>
-    <a href="/productos">Volver</a> 
+    <div class="detail">
+      <img src="${producto.img}" alt="imagen del proyecto" class="detail-img" />
+      <h1>Nombre del proyecto: ${producto.nombre}</h1>
+      <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+      <p><strong>Tecnologías utilizadas:</strong> ${producto.tecnologias}</p>
+      ${producto.link ? `<p><a href="${producto.link}" target="_blank">Ver proyecto ↗</a></p>` : ""}
+      <a href="/productos">Volver</a>
+    </div>
   `;
   return createPage("Detalle del Producto", html);
-} 
-
+}
 
 // Vista del formulario
 export function formularioNuevoProducto() {
@@ -46,6 +49,7 @@ export function formularioNuevoProducto() {
   html += "<input type='text' placeholder='Nombre del Proyecto' name='nombre'/>";
   html += "<input type='text' placeholder='Descripcion del Proyecto' name='descripcion' />";
   html += "<input type='text' placeholder='Tecnologias Usadas' name='tecnologias' />";
+  html += "<input type='text' placeholder='URL de la Imagen' name='img' />";  
   html += "<input type='submit' value='Guardar' />";
   html += "</form>";
 
@@ -96,14 +100,16 @@ export function eliminacionExito(id){
   }
 }
 
-// export function eliminacionExito(id) {
-//   let html = "";
-//   if (id) {
-//     html += `<h1>Id: ${id}</h1>`;
-//     html += `<p>Eliminado correctamente</p>`;
-//     html += `<a href="/productos">Volver</a>`;
-//     return createPage("Eliminado", html);
-//   } else {
-//     return createPage("Error", "<p>Producto no encontrado</p>");
-//   }
-// }
+// Creacion de proyect
+export function creacionExito(producto) {
+  const html = `
+    <div class="detail">
+      <h1>Proyecto creado con éxito</h1>
+      <p><strong>Nombre:</strong> ${producto.nombre}</p>
+      <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+      <p><strong>Tecnologías:</strong> ${producto.tecnologias}</p>
+      <a href="/productos">Volver al listado</a>
+    </div>
+  `;
+  return createPage("Proyecto Creado", html);
+}

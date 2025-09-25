@@ -11,17 +11,23 @@ const db = client.db("AH2023CP1")
 //     await client.connect();
 //     return db.collection("Projects").find(filter).toArray();
 // }
-export async function getProductos(filter={}){
-    const filterMongo = {}
-
-    if(filter.nombre != undefined){
-        filterMongo.nombre = {$eq: filter.nombre}
-    }
+export async function getProductos(filter = {}) {
+    const filterMongo = {};
+  
     
-    await client.connect()
-    return db.collection("Projects").find(filterMongo).toArray()
-}
-
+    if (filter.nombre != undefined) {
+      filterMongo.nombre = { $eq: filter.nombre };
+    }
+  
+    
+    if (filter.seccion != undefined) {
+      filterMongo.seccion = { $eq: filter.seccion };
+    }
+  
+    await client.connect();
+    return db.collection("Projects").find(filterMongo).toArray();
+  }
+  
 //funcion para traer los productos por id
 export async function getProductosById(_id){
     await client.connect()
@@ -29,8 +35,9 @@ export async function getProductosById(_id){
 }
 
 export async function guardarProducto(producto){
-    await client.connect()
-    return db.collection("Projects").insertOne(producto)
+  await client.connect()
+  const result = await db.collection("Projects").insertOne(producto)
+  return result.insertedId  // 👈 devolvemos el id real de Mongo
 }
 
 

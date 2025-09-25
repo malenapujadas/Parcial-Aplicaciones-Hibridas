@@ -21,15 +21,17 @@ export function formularioNuevoProducto(req, res){
     res.send(views.formularioNuevoProducto())
 }
 
-export function guardarProducto(req, res){
+export function guardarProducto(req, res) {
     const producto = {
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        tecnologias: req.body.tecnologias
-    }
+      nombre: req.body.nombre,
+      descripcion: req.body.descripcion,
+      tecnologias: req.body.tecnologias,
+      img: req.body.img 
+    };
+  
     services.guardarProducto(producto)
-    .then(() => res.send(createPage("Producto Creado", `<p>Nombre: ${producto.nombre} - Descrpicion: ${producto.descripcion} - Tecnologias usadas: ${producto.tecnologias}</p>`)))
-}
+      .then(() => res.send(views.creacionExito(producto)));
+  }
 
 
 
@@ -40,18 +42,23 @@ export function formularioModificarProducto(req, res){
         .then( producto => res.send( views.formularioModificarProducto(producto) ) )
 } 
 
-export function editarProducto(req, res){
-    const id = req.params.id
+//funcion para editar
+
+export function editarProducto(req, res) {
+    const id = req.params.id;
     const producto = {
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
         tecnologias: req.body.tecnologias
-    }
-    services.editarProducto( id, producto )
-    .then(producto => res.send(views.crearDetalleProducto(producto)))
-    .catch(err => res.send(views.crearDetalleProducto()))
-}
+    };
 
+    services.editarProducto(id, producto)
+        .then(() => res.redirect("/productos")) 
+        .catch(err => {
+            console.error("Error al editar:", err);
+            res.status(500).send(createPage("Error", "<p>No se pudo editar el producto.</p>"));
+        });
+}
 
 //funcion para eliminar
 export function formularioEliminar(req, res){
@@ -82,28 +89,26 @@ export function formularioEliminar(req, res){
     
 // }
 
+//funcion para eliminar
 export function eliminarProducto(req, res) {
     const id = req.params.id;
 
     services.eliminarProducto(id)
-        .then(idString => {
-            if (idString) {
-                res.send(views.eliminacionExito(idString)); // Producto eliminado correctamente
-            } else {
-                res.send(views.eliminacionExito(null)); // Producto no encontrado
-            }
-        })
+        .then(() => res.redirect("/productos")) 
         .catch(err => {
-            console.error("Error al eliminar el producto:", err);
-            res.status(500).send(createPage("Error", "<p>Ocurrió un error al eliminar el producto.</p>"));
+            console.error("Error al eliminar:", err);
+            res.status(500).send(createPage("Error", "<p>No se pudo eliminar el producto.</p>"));
         });
 }
 
+
+
 export function filtrarProductos(req, res) {
-    const seccion = req.query.seccion;
+    const { seccion } = req.params; //  params en vez de query
 
     services.getProductos({ seccion })
         .then(productos => {
+            
             const secciones = ["Branding", "Diseño Web", "Videoclips", "Diseño Gráfico", "Fotografía"]; 
             res.send(views.crearListadoProductos(productos, secciones));
         })
