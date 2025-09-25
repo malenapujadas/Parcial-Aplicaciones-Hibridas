@@ -4,6 +4,9 @@ import * as controller from "../controller/productos.controller.js"
 
 const router = express.Router()
 
+// Ruta para filtrar productos
+// router.get("/productos/filtrar", controller.filtrarProductos);
+
 //traigo productos
 router.get( "/", controller.getProductos)
 

@@ -2,10 +2,14 @@ import { createPage } from "../pages/utils.js"
 import * as services from "../services/productos.services.js"
 import * as views from "../views/productos.view.js"
 
+
+
 export function getProductos(req, res){
     services.getProductos({eliminados: true})
         .then( (productos) => res.send(views.crearListadoProductos(productos)) )
 }
+
+
 
 export function getProductosById(req, res){
     const id = req.params.id
@@ -56,9 +60,55 @@ export function formularioEliminar(req, res){
         .then( producto => res.send( views.formularioEliminar(producto) ) )
 }
 
-export function eliminarProducto(req, res){
-    const id = req.params.id
-    services.eliminarProducto(id)
-    .then(id => res.send(views.eliminacionExito(id)))
+// export function eliminarProducto(req, res){
+//     const id = req.params.id
+//     services.eliminarProducto(id)
+//     .then(id => res.send(views.eliminacionExito(id)))
     
+// }
+
+
+// export function eliminarProducto(req, res){
+//     const id = req.params.id;
+//     services.eliminarProducto(id)
+//       .then(idString => res.send(views.eliminacionExito(idString)))
+//       .catch(err => res.send(views.eliminacionExito(null)));
+//   }
+
+// export function eliminarProducto(req, res){
+//     const id = req.params.id
+//     services.eliminarProducto(id)
+//     .then(id => res.send(views.eliminacionExito(id)))
+    
+// }
+
+export function eliminarProducto(req, res) {
+    const id = req.params.id;
+
+    services.eliminarProducto(id)
+        .then(idString => {
+            if (idString) {
+                res.send(views.eliminacionExito(idString)); // Producto eliminado correctamente
+            } else {
+                res.send(views.eliminacionExito(null)); // Producto no encontrado
+            }
+        })
+        .catch(err => {
+            console.error("Error al eliminar el producto:", err);
+            res.status(500).send(createPage("Error", "<p>Ocurrió un error al eliminar el producto.</p>"));
+        });
+}
+
+export function filtrarProductos(req, res) {
+    const seccion = req.query.seccion;
+
+    services.getProductos({ seccion })
+        .then(productos => {
+            const secciones = ["Branding", "Diseño Web", "Videoclips", "Diseño Gráfico", "Fotografía"]; 
+            res.send(views.crearListadoProductos(productos, secciones));
+        })
+        .catch(err => {
+            console.error("Error al filtrar los productos:", err);
+            res.status(500).send(createPage("Error", "<p>Ocurrió un error al filtrar los productos.</p>"));
+        });
 }
