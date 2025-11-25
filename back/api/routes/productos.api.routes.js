@@ -1,12 +1,16 @@
 import { Router } from "express";
 import * as controllers from "../controllers/controller.api.productos.js"
+import { validateToken } from "../../middleware/token.validate.middleware.js";
+
+
 const route = Router()
 
+route.get("/",[validateToken], controllers.getProductos)
 route.get("/", controllers.getProductos)
-route.get("/:id", controllers.getProductoById)
-route.post("/", controllers.nuevoProducto)
-route.delete("/:id", controllers.eliminarProducto)
-route.patch("/:id", controllers.editarProducto)
-route.put("/:id", controllers.reemplazarProducto)
+route.get("/:id", [validateToken], controllers.getProductoById)
+route.post("/", [validateProducto, validateToken], controllers.nuevoProducto)
+route.delete("/:id", [validateToken], controllers.eliminarProducto)
+route.patch("/:id", [validateToken], controllers.editarProducto)
+route.put("/:id",[validateToken], controllers.reemplazarProducto)
 
 export default route

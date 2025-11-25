@@ -2,7 +2,12 @@ import { productoSchema } from "../schemas/producto.js";
 
 export function validateProducto(req, res, next){
     console.log('Validando...');
-    productoSchema.validate(req.body, {abortEarly: false, stripUnknown: true})
+    productoSchema.validate(req.body,
+
+        {
+            abortEarly: false, 
+            stripUnknown: true
+        })
         .then( ( ) => next() )
-        .catch( () => res.status(400).json({message:error.errors}))
+        .catch( () => res.status(400).json({message:error.message}))
 }
