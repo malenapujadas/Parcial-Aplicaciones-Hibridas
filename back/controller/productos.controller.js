@@ -1,5 +1,5 @@
 import { createPage } from "../pages/utils.js"
-import * as services from "../services/productos.services.js"
+import * as services from "../../front/src/services/productos.services.js"
 import * as views from "../views/productos.view.js"
 
 

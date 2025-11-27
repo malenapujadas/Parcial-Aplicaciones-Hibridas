@@ -2,8 +2,12 @@ import * as service from '../../services/proyectos.service.js'
 
 export async function getProyectos(req, res){
     try{
-        const usuarioId = req.usuario._id
-        const proyectos = await service.getProyectosByUsuario(usuarioId)
+        let proyectos
+        if (req.usuario && req.usuario._id) {
+            proyectos = await service.getProyectosByUsuario(req.usuario._id)
+        } else {
+            proyectos = await service.getTodosProyectos()
+        }
         return res.status(200).json(proyectos)
     } catch (error){
         return res.status(500).json({ message: error.message })
@@ -14,9 +18,8 @@ export async function getProyecto(req, res){
     try{
         const id = req.params.id
         const proyecto = await service.getProyectoById(id)
-        if(!proyecto) return res.status(404).json({ message: 'Proyecto no encontrado' })
-        if (String(proyecto.owner) !== String(req.usuario._id)) return res.status(403).json({ message: 'No autorizado' })
-        return res.status(200).json(proyecto)
+    if(!proyecto) return res.status(404).json({ message: 'Proyecto no encontrado' })
+    return res.status(200).json(proyecto)
     } catch (error){
         return res.status(500).json({ message: error.message })
     }

@@ -4,11 +4,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import './index.css'
-import Home, { loader as homeLoader } from './pages/Home'
+import Home from './pages/Home'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Layout from './components/Layout.jsx'
-import DetalleProducto from './pages/DetalleProducto.jsx'
+import Proyectos from './pages/Proyectos.jsx'
+import DetalleProyecto from './pages/DetalleProyecto.jsx'
+import FormularioNuevoProyecto from './pages/FormularioNuevoProyecto.jsx'
+import FormularioEditarProyecto from './pages/FormularioEditarProyecto.jsx'
+import EliminarProyecto from './pages/EliminarProyecto.jsx'
 import { SessionProvider } from './contexts/session.context.jsx'
 
 
@@ -21,7 +25,6 @@ let router = createBrowserRouter([
       {
         path: '/',
         element: <Home/>,
-        loader: homeLoader
       },
       {
         path: '/login',
@@ -33,11 +36,23 @@ let router = createBrowserRouter([
       },
       {
         path: '/proyectos',
-        element: <Login/>,
+        element: <Proyectos/>,
       },
       {
-        path: '/detalle/:id',
-        element: <DetalleProducto/>,
+        path: '/proyectos/nuevo',
+        element: <FormularioNuevoProyecto/>,
+      },
+      {
+        path: '/proyectos/:id',
+        element: <DetalleProyecto/>,
+      },
+      {
+        path: '/proyectos/modificar/:id',
+        element: <FormularioEditarProyecto/>,
+      },
+      {
+        path: '/proyectos/eliminar/:id',
+        element: <EliminarProyecto/>,
       },
     ],
   },

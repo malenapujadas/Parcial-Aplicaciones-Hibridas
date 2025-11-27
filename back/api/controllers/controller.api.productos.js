@@ -1,4 +1,4 @@
-import * as service from "../../services/productos.services.js"
+import * as service from "../../../front/src/services/productos.services.js"
 
 export function getProductos(req, res){
     const filtros = req.query

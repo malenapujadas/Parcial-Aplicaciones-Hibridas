@@ -43,21 +43,26 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        type="email"
-        placeholder='Ingresa tu email'
-      />
-      <input
-        value={pass}
-        onChange={(e) => setPass(e.target.value)}
-        type="password"
-        placeholder='Ingresa tu contraseña'
-      />
-      <button onClick={handleLogin} type="button">Ingresar</button>
-      {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '70vh' }}>
+      <form onSubmit={e => { e.preventDefault(); handleLogin(); }} style={{ background: '#222', padding: '2rem', borderRadius: '12px', minWidth: 320, maxWidth: 400, width: '100%', boxShadow: '0 2px 16px #0002', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <h2 style={{ color: '#fff', textAlign: 'center', marginBottom: '1rem' }}>Iniciar sesión</h2>
+        <input
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          type="email"
+          placeholder='Correo electrónico'
+          style={{ padding: '0.75rem', borderRadius: 8, border: 'none', background: '#333', color: '#fff' }}
+        />
+        <input
+          value={pass}
+          onChange={e => setPass(e.target.value)}
+          type="password"
+          placeholder='Contraseña'
+          style={{ padding: '0.75rem', borderRadius: 8, border: 'none', background: '#333', color: '#fff' }}
+        />
+        <button type="submit" style={{ background: '#8884d8', color: '#fff', border: 'none', borderRadius: 8, padding: '0.75rem', fontWeight: 600, cursor: 'pointer' }}>Ingresar</button>
+        {error && <div style={{ color: 'red', marginTop: 8, textAlign: 'center' }}>{error}</div>}
+      </form>
     </div>
   )
 }
