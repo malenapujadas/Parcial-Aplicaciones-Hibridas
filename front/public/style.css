@@ -1,3 +1,66 @@
+.home-main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.home-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.home-img {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+}
+.home-info {
+    margin-top: 2rem;
+    text-align: center;
+}
+.home-title {
+    color: #fff;
+    font-weight: 700;
+}
+.home-desc {
+    color: #ccc;
+}
+.home-footer {
+    width: 100%;
+    text-align: center;
+    color: #aaa;
+    margin-top: auto;
+    padding: 1rem 0;
+}
+
+.main-navbar {
+    background: #111;
+    color: #fff;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+.navbar-title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+.navbar-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +76,6 @@ body {
     min-height: 100vh;
 }
 
-/* HEADER (Home y Proyectos) */
 header,
 .proyectos-header {
     background-color: #111111;
