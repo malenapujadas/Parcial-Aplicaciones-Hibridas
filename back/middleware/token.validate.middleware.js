@@ -5,19 +5,20 @@ export async function validateToken (req, res, next){
 
     try {
         const auth = req.headers.authorization
-        if ( !auth ) res.status (401).json ({message: "Token no encontrado"})
-        
+        if (!auth) return res.status(401).json({ message: "Token no encontrado" })
+
         const [bearer, token] = auth.split(" ");
 
-        if (bearer !== "Bearer" || !token) return res.status (401).json ({ message: "Formato del token invalido"})
-         const usuario = await  tokenService.validateToken (token)
+        if (bearer !== "Bearer" || !token) return res.status(401).json({ message: "Formato del token invalido" })
 
-        if( !usuario ) return res.status(401).json ({message: "Token invalido"})
+        const usuario = await tokenService.validateToken(token)
 
-        req.usuario = usuario 
+        if (!usuario) return res.status(401).json({ message: "Token invalido" })
 
-        next()
-    } catch (error){
-        res.status(401).json({message: "Token"})
+        req.usuario = usuario
+
+        return next()
+    } catch (error) {
+        return res.status(401).json({ message: error.message || "Token invalido" })
     }
 }

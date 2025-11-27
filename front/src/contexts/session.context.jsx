@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
 
 const SessionContext = createContext() //creo contexto
@@ -25,6 +25,18 @@ function useLogin(){
 export function SessionProvider({children}){
     const [usuario, setUsuario] = useState(null)
     const [token, setToken ] = useState(localStorage.getItem("token"))
+
+    // Inicializar usuario desde localStorage si existe
+    useEffect(() => {
+        const raw = localStorage.getItem('usuario')
+        if (raw) {
+            try {
+                setUsuario(JSON.parse(raw))
+            } catch (e) {
+                setUsuario(raw)
+            }
+        }
+    }, [])
 
     const navigate = useNavigate()
 

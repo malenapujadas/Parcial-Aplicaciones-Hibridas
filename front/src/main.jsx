@@ -6,6 +6,7 @@ import App from './App.jsx'
 import './index.css'
 import Home, { loader as homeLoader } from './pages/Home'
 import Login from './pages/Login.jsx'
+import Register from './pages/Register.jsx'
 import Layout from './components/Layout.jsx'
 import DetalleProducto from './pages/DetalleProducto.jsx'
 import { SessionProvider } from './contexts/session.context.jsx'
@@ -25,6 +26,10 @@ let router = createBrowserRouter([
       {
         path: '/login',
         element: <Login/>,
+      },
+      {
+        path: '/register',
+        element: <Register/>,
       },
       {
         path: '/proyectos',

@@ -14,6 +14,7 @@ export async function createUser(usuario) {
     if (existe) throw new Error("El usuario ya existe");
 
     const nuevoUsuario = {
+        username: usuario.username,
         email: usuario.email,
         age: usuario.age,
         password: await bcrypt.hash(usuario.password, 10) // encriptamos 
@@ -23,7 +24,7 @@ export async function createUser(usuario) {
     await db.collection("usuarios").insertOne(nuevoUsuario);
 
     // Devolver usuario sin password
-    return { email: nuevoUsuario.email, age: nuevoUsuario.age };
+    return { username: nuevoUsuario.username, email: nuevoUsuario.email, age: nuevoUsuario.age };
 }
 
 
@@ -41,6 +42,7 @@ export async function login(usuario) {
 
     return {
         _id: existe._id,
+        username: existe.username,
         email: existe.email,
         age: existe.age,
         token

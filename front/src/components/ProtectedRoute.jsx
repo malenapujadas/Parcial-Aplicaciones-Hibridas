@@ -1,13 +1,12 @@
 import React from 'react'
-import { Navigate  } from 'react-router'
+import { Navigate } from 'react-router-dom'
+import { useToken } from '../contexts/session.context.jsx'
 
-const ProtectedRoute = ({element}) => {
-    const session = JSON.parse(localStorage.getItem("session"))
-    if(session) return element
+const ProtectedRoute = ({ element }) => {
+    const token = useToken()
+    if (token) return element
 
-    return <Navigate to="/login"/>
-    
-  
+    return <Navigate to="/login" replace />
 }
 
 export default ProtectedRoute

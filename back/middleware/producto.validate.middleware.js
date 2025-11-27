@@ -8,6 +8,6 @@ export function validateProducto(req, res, next){
             abortEarly: false, 
             stripUnknown: true
         })
-        .then( ( ) => next() )
-        .catch( () => res.status(400).json({message:error.message}))
+        .then( () => next() )
+        .catch( (error) => res.status(400).json({ message: error.message, errors: error.errors || [] }))
 }
