@@ -8,6 +8,8 @@ import Home, { loader as homeLoader } from './pages/Home'
 import Login from './pages/Login.jsx'
 import Layout from './components/Layout.jsx'
 import DetalleProducto from './pages/DetalleProducto.jsx'
+import { SessionContext } from '../contexts/session.context'
+
 
 
 let router = createBrowserRouter([
@@ -46,6 +48,8 @@ let router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <SessionProvider>
+      <RouterProvider router={router}/>
+    </SessionProvider>
   </StrictMode>,
 )

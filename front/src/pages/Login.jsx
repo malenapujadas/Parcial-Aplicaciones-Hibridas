@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useState } from 'react'
+import {useNavigate} from "react-router-dom"
+import { useLogin } from '../contexts/session.context'
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
 
+  const login = useLogin()
+  
   const handleLogin = () => {
     console.log(email, pass);
-    localStorage.setItem("session", JSON.stringify({email, pass}))
-    navigate("/")
+    login(usuario.token, usuario)    
   } 
 
   return (
