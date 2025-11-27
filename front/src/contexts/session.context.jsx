@@ -29,8 +29,12 @@ export function SessionProvider({children}){
     const navigate = useNavigate()
 
     const onLogin = (jwt, usuario) => {
-        localStorage.setItem(token)
-        localStorage.setItem("usuario", usuario)
+        localStorage.setItem("token", jwt)
+        try {
+            localStorage.setItem("usuario", JSON.stringify(usuario))
+        } catch (e) {
+            localStorage.setItem("usuario", String(usuario))
+        }
         setToken(jwt)
         setUsuario(usuario)
         navigate("/")

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useLoaderData } from 'react-router-dom'
 
 export async function loader() {
-  const res = await fetch("http://localhost:3333/api/productos")
-  const productos = await res.json()
+    const token = localStorage.getItem("token")
+    const headers = token ? { Authorization: `Bearer ${token}` } : {}
+    const res = await fetch("http://localhost:3333/api/productos", { headers })
+    const productos = await res.json()
   return { productos }
 }
  

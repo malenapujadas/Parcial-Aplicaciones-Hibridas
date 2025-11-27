@@ -1,11 +1,12 @@
 import { Router } from "express";
 import * as controllers from "../controllers/controller.api.productos.js"
 import { validateToken } from "../../middleware/token.validate.middleware.js";
+import { validateProducto } from "../../middleware/producto.validate.middleware.js";
 
 
 const route = Router()
 
-route.get("/",[validateToken], controllers.getProductos)
+// Public: listado de productos (no requiere token)
 route.get("/", controllers.getProductos)
 route.get("/:id", [validateToken], controllers.getProductoById)
 route.post("/", [validateProducto, validateToken], controllers.nuevoProducto)
